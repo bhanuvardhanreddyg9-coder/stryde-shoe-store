@@ -1,0 +1,2977 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>STRYDE — Premium Footwear</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --black: #0f0f0f;
+        --white: #ffffff;
+        --accent: #ff3d00;
+        --accent2: #ffb300;
+        --gray-light: #f5f5f5;
+        --gray-mid: #e0e0e0;
+        --gray-text: #666;
+        --font-display: "Bebas Neue", sans-serif;
+        --font-body: "Inter", sans-serif;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: var(--font-body);
+        background: var(--white);
+        color: var(--black);
+        overflow-x: hidden;
+      }
+
+      /* NAV */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background: rgba(15, 15, 15, 0.95);
+        backdrop-filter: blur(10px);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 5%;
+        height: 64px;
+      }
+      .nav-logo {
+        font-family: var(--font-display);
+        font-size: 2rem;
+        color: var(--white);
+        letter-spacing: 2px;
+      }
+      .nav-logo span {
+        color: var(--accent);
+      }
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+      .nav-links a {
+        color: rgba(255, 255, 255, 0.75);
+        text-decoration: none;
+        font-size: 0.85rem;
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        transition: color 0.2s;
+      }
+      .nav-links a:hover {
+        color: var(--accent);
+      }
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+      }
+      .nav-cart {
+        position: relative;
+        cursor: pointer;
+      }
+      .nav-cart svg {
+        width: 22px;
+        height: 22px;
+        stroke: white;
+        fill: none;
+      }
+      .cart-count {
+        position: absolute;
+        top: -6px;
+        right: -6px;
+        background: var(--accent);
+        color: white;
+        font-size: 10px;
+        font-weight: 600;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+      }
+      .hamburger span {
+        width: 24px;
+        height: 2px;
+        background: white;
+        transition: all 0.3s;
+      }
+
+      /* HERO SLIDER */
+      .hero {
+        position: relative;
+        height: 100vh;
+        overflow: hidden;
+        margin-top: 64px;
+      }
+      .slides {
+        display: flex;
+        height: 100%;
+        transition: transform 0.7s cubic-bezier(0.77, 0, 0.175, 1);
+      }
+      .slide {
+        min-width: 100%;
+        height: 100%;
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+      .slide-bg {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+      }
+      .slide-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          90deg,
+          rgba(0, 0, 0, 0.75) 0%,
+          rgba(0, 0, 0, 0.1) 100%
+        );
+      }
+      .slide-content {
+        position: relative;
+        z-index: 2;
+        padding: 0 8%;
+        max-width: 700px;
+      }
+      .slide-tag {
+        display: inline-block;
+        background: var(--accent);
+        color: white;
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 5px 14px;
+        margin-bottom: 1.2rem;
+      }
+      .slide-title {
+        font-family: var(--font-display);
+        font-size: clamp(3.5rem, 8vw, 7rem);
+        color: white;
+        line-height: 0.9;
+        letter-spacing: 2px;
+        margin-bottom: 1.2rem;
+      }
+      .slide-subtitle {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 1rem;
+        font-weight: 300;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+        max-width: 420px;
+      }
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--accent);
+        color: white;
+        padding: 14px 32px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        text-decoration: none;
+        cursor: pointer;
+        border: none;
+        transition:
+          background 0.2s,
+          transform 0.2s;
+      }
+      .btn-primary:hover {
+        background: #e03000;
+        transform: translateY(-2px);
+      }
+      .btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: transparent;
+        color: white;
+        padding: 14px 32px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        text-decoration: none;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        margin-left: 1rem;
+        transition: all 0.2s;
+      }
+      .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+      .slide-dots {
+        position: absolute;
+        bottom: 2.5rem;
+        left: 8%;
+        display: flex;
+        gap: 10px;
+        z-index: 3;
+      }
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.4);
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .dot.active {
+        background: var(--accent);
+        width: 28px;
+        border-radius: 4px;
+      }
+      .slide-arrows {
+        position: absolute;
+        bottom: 2.2rem;
+        right: 8%;
+        display: flex;
+        gap: 10px;
+        z-index: 3;
+      }
+      .arrow-btn {
+        width: 44px;
+        height: 44px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        background: transparent;
+        color: white;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        font-size: 1.1rem;
+      }
+      .arrow-btn:hover {
+        background: var(--accent);
+        border-color: var(--accent);
+      }
+
+      /* MARQUEE */
+      .marquee-bar {
+        background: var(--accent);
+        padding: 10px 0;
+        overflow: hidden;
+      }
+      .marquee-track {
+        display: flex;
+        gap: 3rem;
+        animation: marquee 20s linear infinite;
+        white-space: nowrap;
+      }
+      .marquee-track span {
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: white;
+      }
+      @keyframes marquee {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      /* CATEGORIES */
+      .section {
+        padding: 6rem 5%;
+      }
+      .section-label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 0.5rem;
+      }
+      .section-title {
+        font-family: var(--font-display);
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        letter-spacing: 1px;
+        margin-bottom: 0.5rem;
+      }
+      .section-subtitle {
+        color: var(--gray-text);
+        font-size: 0.95rem;
+        font-weight: 300;
+        max-width: 500px;
+      }
+
+      .categories-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        margin-top: 3rem;
+      }
+      .cat-card {
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        aspect-ratio: 4/5;
+      }
+      .cat-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+      }
+      .cat-card:hover img {
+        transform: scale(1.07);
+      }
+      .cat-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          0deg,
+          rgba(0, 0, 0, 0.75) 0%,
+          rgba(0, 0, 0, 0) 55%
+        );
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 2rem;
+      }
+      .cat-name {
+        font-family: var(--font-display);
+        font-size: 2.2rem;
+        color: white;
+        letter-spacing: 2px;
+      }
+      .cat-count {
+        color: rgba(255, 255, 255, 0.65);
+        font-size: 0.8rem;
+        font-weight: 400;
+        margin-top: 2px;
+      }
+      .cat-arrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--accent);
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-top: 0.8rem;
+        text-decoration: none;
+      }
+
+      /* FILTER BAR */
+      .filter-bar {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 2.5rem;
+      }
+      .filter-btn {
+        padding: 8px 20px;
+        border: 1px solid var(--gray-mid);
+        background: transparent;
+        font-size: 0.82rem;
+        font-weight: 500;
+        cursor: pointer;
+        letter-spacing: 0.05em;
+        transition: all 0.2s;
+        font-family: var(--font-body);
+      }
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: var(--black);
+        color: white;
+        border-color: var(--black);
+      }
+      .filter-right {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      .sort-select {
+        padding: 8px 14px;
+        border: 1px solid var(--gray-mid);
+        font-size: 0.82rem;
+        font-family: var(--font-body);
+        cursor: pointer;
+        background: white;
+      }
+
+      /* PRODUCTS GRID */
+      .products-section {
+        padding: 2rem 5% 6rem;
+        background: var(--gray-light);
+      }
+      .products-header {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        margin-bottom: 2rem;
+      }
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .product-card {
+        background: white;
+        cursor: pointer;
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+      }
+      .product-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+      }
+      .product-img {
+        position: relative;
+        overflow: hidden;
+        aspect-ratio: 1/1;
+        background: #f9f9f9;
+      }
+      .product-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+      .product-card:hover .product-img img {
+        transform: scale(1.05);
+      }
+      .product-badge {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 4px 10px;
+      }
+      .badge-new {
+        background: var(--black);
+        color: white;
+      }
+      .badge-sale {
+        background: var(--accent);
+        color: white;
+      }
+      .badge-hot {
+        background: var(--accent2);
+        color: var(--black);
+      }
+      .product-quick {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: var(--black);
+        color: white;
+        text-align: center;
+        padding: 12px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        transform: translateY(100%);
+        transition: transform 0.3s;
+        cursor: pointer;
+        border: none;
+        font-family: var(--font-body);
+      }
+      .product-card:hover .product-quick {
+        transform: translateY(0);
+      }
+      .product-info {
+        padding: 1rem;
+      }
+      .product-brand {
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--gray-text);
+        margin-bottom: 4px;
+      }
+      .product-name {
+        font-size: 0.92rem;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        line-height: 1.3;
+      }
+      .product-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .product-price {
+        font-size: 1rem;
+        font-weight: 600;
+      }
+      .product-price .original {
+        font-size: 0.82rem;
+        color: var(--gray-text);
+        text-decoration: line-through;
+        margin-right: 6px;
+        font-weight: 400;
+      }
+      .product-price .sale {
+        color: var(--accent);
+      }
+      .product-stars {
+        display: flex;
+        align-items: center;
+        gap: 3px;
+      }
+      .star {
+        color: var(--accent2);
+        font-size: 11px;
+      }
+      .star-count {
+        font-size: 0.72rem;
+        color: var(--gray-text);
+        margin-left: 2px;
+      }
+
+      /* WISHLIST BTN */
+      .wishlist-btn {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        width: 34px;
+        height: 34px;
+        background: white;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+        transition: all 0.2s;
+      }
+      .wishlist-btn:hover {
+        background: var(--accent);
+      }
+      .wishlist-btn:hover svg {
+        stroke: white;
+      }
+      .wishlist-btn svg {
+        width: 16px;
+        height: 16px;
+        stroke: #999;
+        fill: none;
+        transition: stroke 0.2s;
+      }
+
+      /* LOAD MORE */
+      .load-more-wrap {
+        text-align: center;
+        margin-top: 3rem;
+      }
+      .btn-outline {
+        padding: 14px 48px;
+        border: 1.5px solid var(--black);
+        background: transparent;
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        cursor: pointer;
+        font-family: var(--font-body);
+        transition: all 0.2s;
+      }
+      .btn-outline:hover {
+        background: var(--black);
+        color: white;
+      }
+
+      /* BANNER STRIP */
+      .banner-strip {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        padding: 0 5% 6rem;
+      }
+      .banner-card {
+        position: relative;
+        overflow: hidden;
+        padding: 3.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        min-height: 380px;
+      }
+      .banner-card img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .banner-card-overlay {
+        position: absolute;
+        inset: 0;
+      }
+      .banner-card-content {
+        position: relative;
+        z-index: 2;
+      }
+      .banner-card-tag {
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+      }
+      .banner-card-title {
+        font-family: var(--font-display);
+        font-size: 3rem;
+        letter-spacing: 2px;
+        line-height: 0.9;
+        margin-bottom: 1rem;
+      }
+
+      /* FEATURES */
+      .features {
+        background: var(--black);
+        padding: 5rem 5%;
+      }
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+      .feature-item {
+        text-align: center;
+        padding: 2rem 1rem;
+      }
+      .feature-icon {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+      .feature-title {
+        font-family: var(--font-display);
+        font-size: 1.3rem;
+        color: white;
+        letter-spacing: 1px;
+        margin-bottom: 0.5rem;
+      }
+      .feature-text {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.85rem;
+        line-height: 1.6;
+      }
+
+      /* NEWSLETTER */
+      .newsletter {
+        padding: 6rem 5%;
+        background: var(--accent);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 3rem;
+        flex-wrap: wrap;
+      }
+      .newsletter-left h2 {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 4vw, 3.5rem);
+        color: white;
+        letter-spacing: 2px;
+      }
+      .newsletter-left p {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.95rem;
+        margin-top: 0.5rem;
+      }
+      .newsletter-form {
+        display: flex;
+        gap: 0;
+        flex: 1;
+        max-width: 480px;
+      }
+      .newsletter-input {
+        flex: 1;
+        padding: 16px 20px;
+        border: none;
+        font-size: 0.9rem;
+        font-family: var(--font-body);
+        outline: none;
+      }
+      .newsletter-submit {
+        padding: 16px 28px;
+        background: var(--black);
+        color: white;
+        border: none;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        cursor: pointer;
+        font-family: var(--font-body);
+        transition: background 0.2s;
+        white-space: nowrap;
+      }
+      .newsletter-submit:hover {
+        background: #222;
+      }
+
+      /* FOOTER */
+      footer {
+        background: var(--black);
+        color: white;
+        padding: 5rem 5% 2rem;
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 3rem;
+        margin-bottom: 4rem;
+      }
+      .footer-brand {
+        font-family: var(--font-display);
+        font-size: 2.5rem;
+        letter-spacing: 3px;
+        margin-bottom: 1rem;
+      }
+      .footer-brand span {
+        color: var(--accent);
+      }
+      .footer-desc {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.875rem;
+        line-height: 1.7;
+        max-width: 280px;
+      }
+      .footer-heading {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.4);
+        margin-bottom: 1.2rem;
+      }
+      .footer-links {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+      }
+      .footer-links a {
+        color: rgba(255, 255, 255, 0.65);
+        text-decoration: none;
+        font-size: 0.875rem;
+        transition: color 0.2s;
+      }
+      .footer-links a:hover {
+        color: var(--accent);
+      }
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding-top: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .footer-copy {
+        color: rgba(255, 255, 255, 0.35);
+        font-size: 0.8rem;
+      }
+
+      /* CART SIDEBAR */
+      .cart-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 2000;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s;
+      }
+      .cart-overlay.open {
+        opacity: 1;
+        pointer-events: all;
+      }
+      .cart-sidebar {
+        position: fixed;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 400px;
+        background: white;
+        z-index: 2001;
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+        display: flex;
+        flex-direction: column;
+      }
+      .cart-sidebar.open {
+        transform: translateX(0);
+      }
+      .cart-header {
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--gray-mid);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .cart-title {
+        font-family: var(--font-display);
+        font-size: 1.5rem;
+        letter-spacing: 1px;
+      }
+      .cart-close {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+      .cart-items {
+        flex: 1;
+        overflow-y: auto;
+        padding: 1rem 1.5rem;
+      }
+      .cart-item {
+        display: flex;
+        gap: 1rem;
+        padding: 1rem 0;
+        border-bottom: 1px solid var(--gray-light);
+      }
+      .cart-item-img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        background: var(--gray-light);
+        flex-shrink: 0;
+      }
+      .cart-item-info {
+        flex: 1;
+      }
+      .cart-item-name {
+        font-size: 0.9rem;
+        font-weight: 500;
+        margin-bottom: 4px;
+      }
+      .cart-item-price {
+        font-size: 0.9rem;
+        color: var(--accent);
+        font-weight: 600;
+      }
+      .cart-item-remove {
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: var(--gray-text);
+        font-size: 1.2rem;
+        align-self: flex-start;
+      }
+      .cart-empty {
+        text-align: center;
+        padding: 4rem 2rem;
+        color: var(--gray-text);
+      }
+      .cart-footer {
+        padding: 1.5rem;
+        border-top: 1px solid var(--gray-mid);
+      }
+      .cart-total {
+        display: flex;
+        justify-content: space-between;
+        font-weight: 600;
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+      }
+      .btn-checkout {
+        display: block;
+        width: 100%;
+        padding: 16px;
+        background: var(--black);
+        color: white;
+        text-align: center;
+        border: none;
+        font-size: 0.9rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        cursor: pointer;
+        font-family: var(--font-body);
+        transition: background 0.2s;
+      }
+      .btn-checkout:hover {
+        background: var(--accent);
+      }
+
+      /* TOAST */
+      .toast {
+        position: fixed;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%) translateY(100px);
+        background: var(--black);
+        color: white;
+        padding: 14px 28px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        z-index: 3000;
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        pointer-events: none;
+      }
+      .toast.show {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 1024px) {
+        .features-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .footer-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+        .hamburger {
+          display: flex;
+        }
+        .categories-grid {
+          grid-template-columns: 1fr;
+        }
+        .banner-strip {
+          grid-template-columns: 1fr;
+        }
+        .features-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+        .newsletter {
+          flex-direction: column;
+        }
+        .newsletter-form {
+          max-width: 100%;
+          width: 100%;
+        }
+        .cart-sidebar {
+          width: 100%;
+        }
+        .filter-right {
+          margin-left: 0;
+          width: 100%;
+        }
+        .products-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 1rem;
+        }
+        .slide-title {
+          font-size: 3.5rem;
+        }
+        .btn-secondary {
+          display: none;
+        }
+      }
+      @media (max-width: 480px) {
+        .products-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 0.8rem;
+        }
+        .features-grid {
+          grid-template-columns: 1fr;
+        }
+        .footer-bottom {
+          flex-direction: column;
+          gap: 1rem;
+          text-align: center;
+        }
+        .section {
+          padding: 4rem 4%;
+        }
+      }
+
+      /* ANIMATIONS */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition:
+          opacity 0.6s ease,
+          transform 0.6s ease;
+      }
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav>
+      <div class="nav-logo">STRY<span>DE</span></div>
+      <ul class="nav-links">
+        <li><a href="#categories">Categories</a></li>
+        <li><a href="#products">Shop</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-right">
+        <div class="nav-cart" id="cartBtn">
+          <svg viewBox="0 0 24 24" stroke-width="1.5">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.882-7.148A60.114 60.114 0 003.27 5.272M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+            />
+          </svg>
+          <span class="cart-count" id="cartCount">0</span>
+        </div>
+        <div class="hamburger" id="hamburger">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="slides" id="slides">
+        <div class="slide">
+          <div
+            class="slide-bg"
+            style="
+              background-image: url(&quot;https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=1800&q=80&quot;);
+            "
+          ></div>
+          <div class="slide-overlay"></div>
+          <div class="slide-content">
+            <span class="slide-tag">New Season 2025</span>
+            <h1 class="slide-title">RUN YOUR<br />WORLD</h1>
+            <p class="slide-subtitle">
+              Performance meets style. Our latest sports collection pushes the
+              boundaries of what's possible on and off the track.
+            </p>
+            <button class="btn-primary" onclick="scrollToSection('products')">
+              Shop Sports
+            </button>
+            <button
+              class="btn-secondary"
+              onclick="scrollToSection('categories')"
+            >
+              Explore All
+            </button>
+          </div>
+        </div>
+        <div class="slide">
+          <div
+            class="slide-bg"
+            style="
+              background-image: url(&quot;https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=1800&q=80&quot;);
+            "
+          ></div>
+          <div class="slide-overlay"></div>
+          <div class="slide-content">
+            <span class="slide-tag">Casual Collection</span>
+            <h1 class="slide-title">STREET<br />READY</h1>
+            <p class="slide-subtitle">
+              Effortless comfort for everyday adventures. Casual shoes built for
+              the way you actually live.
+            </p>
+            <button class="btn-primary" onclick="filterProducts('Casual')">
+              Shop Casual
+            </button>
+            <button
+              class="btn-secondary"
+              onclick="scrollToSection('categories')"
+            >
+              Explore All
+            </button>
+          </div>
+        </div>
+        <div class="slide">
+          <div
+            class="slide-bg"
+            style="
+              background-image: url(&quot;https://images.unsplash.com/photo-1449505278894-297fdb3edbc1?w=1800&q=80&quot;);
+            "
+          ></div>
+          <div class="slide-overlay"></div>
+          <div class="slide-content">
+            <span class="slide-tag">Formal Edition</span>
+            <h1 class="slide-title">DRESS<br />TO WIN</h1>
+            <p class="slide-subtitle">
+              Crafted for the boardroom and beyond. Premium leather formal shoes
+              that command respect.
+            </p>
+            <button class="btn-primary" onclick="filterProducts('Formal')">
+              Shop Formal
+            </button>
+            <button
+              class="btn-secondary"
+              onclick="scrollToSection('categories')"
+            >
+              Explore All
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="slide-dots" id="dots">
+        <div class="dot active" onclick="goToSlide(0)"></div>
+        <div class="dot" onclick="goToSlide(1)"></div>
+        <div class="dot" onclick="goToSlide(2)"></div>
+      </div>
+      <div class="slide-arrows">
+        <button class="arrow-btn" onclick="prevSlide()">&#8592;</button>
+        <button class="arrow-btn" onclick="nextSlide()">&#8594;</button>
+      </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee-bar">
+      <div class="marquee-track" id="marqueeTrack">
+        <span>Free Shipping Over ₹2999</span><span>★</span>
+        <span>New Arrivals Every Week</span><span>★</span>
+        <span>Easy 30-Day Returns</span><span>★</span>
+        <span>100% Authentic Products</span><span>★</span>
+        <span>EMI Available</span><span>★</span>
+        <span>Premium Quality Guaranteed</span><span>★</span>
+        <span>Free Shipping Over ₹2999</span><span>★</span>
+        <span>New Arrivals Every Week</span><span>★</span>
+        <span>Easy 30-Day Returns</span><span>★</span>
+        <span>100% Authentic Products</span><span>★</span>
+        <span>EMI Available</span><span>★</span>
+        <span>Premium Quality Guaranteed</span><span>★</span>
+      </div>
+    </div>
+
+    <!-- CATEGORIES -->
+    <section class="section" id="categories">
+      <div class="section-label">Browse by Category</div>
+      <h2 class="section-title">SHOP THE COLLECTION</h2>
+      <p class="section-subtitle">
+        Find the perfect pair for every occasion — sport, street, or formal
+        setting.
+      </p>
+      <div class="categories-grid fade-in">
+        <div class="cat-card" onclick="filterProducts('Sports')">
+          <img
+            src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=80"
+            alt="Sports Shoes"
+          />
+          <div class="cat-overlay">
+            <div class="cat-name">SPORTS</div>
+            <div class="cat-count">42 Products</div>
+            <span class="cat-arrow">Shop Now →</span>
+          </div>
+        </div>
+        <div class="cat-card" onclick="filterProducts('Casual')">
+          <img
+            src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=800&q=80"
+            alt="Casual Shoes"
+          />
+          <div class="cat-overlay">
+            <div class="cat-name">CASUAL</div>
+            <div class="cat-count">38 Products</div>
+            <span class="cat-arrow">Shop Now →</span>
+          </div>
+        </div>
+        <div class="cat-card" onclick="filterProducts('Formal')">
+          <img
+            src="https://images.unsplash.com/photo-1449505278894-297fdb3edbc1?w=800&q=80"
+            alt="Formal Shoes"
+          />
+          <div class="cat-overlay">
+            <div class="cat-name">FORMAL</div>
+            <div class="cat-count">29 Products</div>
+            <span class="cat-arrow">Shop Now →</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section class="products-section" id="products">
+      <div class="products-header">
+        <div>
+          <div class="section-label">Our Collection</div>
+          <h2 class="section-title">ALL PRODUCTS</h2>
+        </div>
+      </div>
+      <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterProducts('All', this)">
+          All
+        </button>
+        <button class="filter-btn" onclick="filterProducts('Sports', this)">
+          Sports
+        </button>
+        <button class="filter-btn" onclick="filterProducts('Casual', this)">
+          Casual
+        </button>
+        <button class="filter-btn" onclick="filterProducts('Formal', this)">
+          Formal
+        </button>
+        <div class="filter-right">
+          <select class="sort-select" id="sortSelect" onchange="sortProducts()">
+            <option value="featured">Featured</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="rating">Best Rated</option>
+          </select>
+        </div>
+      </div>
+      <div class="products-grid" id="productsGrid"></div>
+      <div class="load-more-wrap">
+        <button class="btn-outline" id="loadMoreBtn" onclick="loadMore()">
+          Load More Products
+        </button>
+      </div>
+    </section>
+
+    <!-- BANNER STRIP -->
+    <div class="banner-strip">
+      <div class="banner-card">
+        <img
+          src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=800&q=80"
+          alt="Sports Banner"
+        />
+        <div
+          class="banner-card-overlay"
+          style="
+            background: linear-gradient(
+              135deg,
+              rgba(255, 61, 0, 0.7),
+              rgba(0, 0, 0, 0.4)
+            );
+          "
+        ></div>
+        <div class="banner-card-content">
+          <div class="banner-card-tag" style="color: rgba(255, 255, 255, 0.7)">
+            Limited Time
+          </div>
+          <div class="banner-card-title" style="color: white">
+            UP TO<br />40% OFF<br />SPORTS
+          </div>
+          <button class="btn-primary" onclick="filterProducts('Sports')">
+            Shop Now
+          </button>
+        </div>
+      </div>
+      <div class="banner-card">
+        <img
+          src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=800&q=80"
+          alt="Casual Banner"
+        />
+        <div
+          class="banner-card-overlay"
+          style="
+            background: linear-gradient(
+              135deg,
+              rgba(15, 15, 15, 0.8),
+              rgba(0, 0, 0, 0.2)
+            );
+          "
+        ></div>
+        <div class="banner-card-content">
+          <div class="banner-card-tag" style="color: rgba(255, 255, 255, 0.7)">
+            New Arrivals
+          </div>
+          <div class="banner-card-title" style="color: white">
+            CASUAL<br />SEASON<br />IS HERE
+          </div>
+          <button class="btn-primary" onclick="filterProducts('Casual')">
+            Explore
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEATURES -->
+    <section class="features" id="about">
+      <div class="section-label" style="color: var(--accent)">
+        Why Choose Stryde
+      </div>
+      <h2 class="section-title" style="color: white">WE MEAN BUSINESS</h2>
+      <div class="features-grid fade-in">
+        <div class="feature-item">
+          <div class="feature-icon">🚚</div>
+          <div class="feature-title">FREE DELIVERY</div>
+          <div class="feature-text">
+            Free shipping on all orders above ₹2999. Fast delivery across India.
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">↩️</div>
+          <div class="feature-title">30 DAY RETURNS</div>
+          <div class="feature-text">
+            Not happy? Return within 30 days for a full refund, no questions
+            asked.
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">✅</div>
+          <div class="feature-title">100% AUTHENTIC</div>
+          <div class="feature-text">
+            Every pair is verified authentic. We source directly from brand
+            distributors.
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">💳</div>
+          <div class="feature-title">SECURE PAYMENT</div>
+          <div class="feature-text">
+            Multiple payment options. UPI, cards, net banking and EMI available.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <div class="newsletter" id="contact">
+      <div class="newsletter-left">
+        <h2>GET 10% OFF YOUR FIRST ORDER</h2>
+        <p>Subscribe to our newsletter for exclusive deals and new arrivals.</p>
+      </div>
+      <div class="newsletter-form">
+        <input
+          type="email"
+          class="newsletter-input"
+          placeholder="Enter your email address"
+        />
+        <button class="newsletter-submit" onclick="subscribeNewsletter()">
+          Subscribe
+        </button>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">STRY<span>DE</span></div>
+          <p class="footer-desc">
+            Premium footwear for every stride. Sports, casual, and formal shoes
+            built for people who move with purpose.
+          </p>
+        </div>
+        <div>
+          <div class="footer-heading">Shop</div>
+          <ul class="footer-links">
+            <li><a href="#">Sports Shoes</a></li>
+            <li><a href="#">Casual Shoes</a></li>
+            <li><a href="#">Formal Shoes</a></li>
+            <li><a href="#">New Arrivals</a></li>
+            <li><a href="#">Sale</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">Help</div>
+          <ul class="footer-links">
+            <li><a href="#">Size Guide</a></li>
+            <li><a href="#">Track Order</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">Company</div>
+          <ul class="footer-links">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Press</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2025 STRYDE. All rights reserved.</span>
+        <span class="footer-copy">Made with ❤ in India</span>
+      </div>
+    </footer>
+
+    <!-- CART SIDEBAR -->
+    <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+      <div class="cart-header">
+        <div class="cart-title">YOUR CART</div>
+        <button class="cart-close" onclick="closeCart()">✕</button>
+      </div>
+      <div class="cart-items" id="cartItems">
+        <div class="cart-empty" id="cartEmpty">
+          <div style="font-size: 3rem; margin-bottom: 1rem">👟</div>
+          <p>Your cart is empty</p>
+          <p style="font-size: 0.8rem; margin-top: 0.5rem; color: #999">
+            Add some shoes to get started
+          </p>
+        </div>
+      </div>
+      <div class="cart-footer">
+        <div class="cart-total">
+          <span>Total</span><span id="cartTotal">₹0</span>
+        </div>
+        <button class="btn-checkout" onclick="checkout()">
+          Proceed to Checkout
+        </button>
+      </div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+      // PRODUCTS DATA
+      const allProducts = [
+        // SPORTS
+        {
+          id: 1,
+          name: "Air Strike Pro Runner",
+          brand: "Nike",
+          category: "Sports",
+          price: 7999,
+          originalPrice: 9999,
+          rating: 4.8,
+          reviews: 2341,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80",
+        },
+        {
+          id: 2,
+          name: "UltraBoost Speed X",
+          brand: "Adidas",
+          category: "Sports",
+          price: 8499,
+          originalPrice: 10999,
+          rating: 4.7,
+          reviews: 1876,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=400&q=80",
+        },
+        {
+          id: 3,
+          name: "CloudRun Elite",
+          brand: "On Running",
+          category: "Sports",
+          price: 11999,
+          originalPrice: 14999,
+          rating: 4.9,
+          reviews: 987,
+          badge: "Hot",
+          img: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&q=80",
+        },
+        {
+          id: 4,
+          name: "Gel Nimbus 25",
+          brand: "Asics",
+          category: "Sports",
+          price: 9499,
+          originalPrice: null,
+          rating: 4.6,
+          reviews: 1543,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1539185441755-769473a23570?w=400&q=80",
+        },
+        {
+          id: 5,
+          name: "Fresh Foam X 1080",
+          brand: "New Balance",
+          category: "Sports",
+          price: 10999,
+          originalPrice: 12999,
+          rating: 4.8,
+          reviews: 2109,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=400&q=80",
+        },
+        {
+          id: 6,
+          name: "React Infinity Run 4",
+          brand: "Nike",
+          category: "Sports",
+          price: 9999,
+          originalPrice: null,
+          rating: 4.7,
+          reviews: 1234,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=400&q=80",
+        },
+        {
+          id: 7,
+          name: "Supernova Rise",
+          brand: "Adidas",
+          category: "Sports",
+          price: 7499,
+          originalPrice: 8999,
+          rating: 4.5,
+          reviews: 876,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1514989940723-e8e51635b782?w=400&q=80",
+        },
+        {
+          id: 8,
+          name: "Kayano 30",
+          brand: "Asics",
+          category: "Sports",
+          price: 12499,
+          originalPrice: 14999,
+          rating: 4.9,
+          reviews: 3210,
+          badge: "Hot",
+          img: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=400&q=80",
+        },
+        {
+          id: 9,
+          name: "Pegasus 41 Trail",
+          brand: "Nike",
+          category: "Sports",
+          price: 8999,
+          originalPrice: null,
+          rating: 4.6,
+          reviews: 1654,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1527612822757-9c80c7e9b9ba?w=400&q=80",
+        },
+        {
+          id: 10,
+          name: "Solar Boost 5",
+          brand: "Adidas",
+          category: "Sports",
+          price: 9299,
+          originalPrice: 11499,
+          rating: 4.7,
+          reviews: 1098,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&q=80",
+        },
+        {
+          id: 11,
+          name: "Wave Rider 27",
+          brand: "Mizuno",
+          category: "Sports",
+          price: 8799,
+          originalPrice: null,
+          rating: 4.6,
+          reviews: 789,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=401&q=80",
+        },
+        {
+          id: 12,
+          name: "Endorphin Speed 4",
+          brand: "Saucony",
+          category: "Sports",
+          price: 10499,
+          originalPrice: 12999,
+          rating: 4.8,
+          reviews: 1432,
+          badge: "Hot",
+          img: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=401&q=80",
+        },
+        {
+          id: 13,
+          name: "Clifton 9 GTX",
+          brand: "Hoka",
+          category: "Sports",
+          price: 13499,
+          originalPrice: 15999,
+          rating: 4.9,
+          reviews: 2876,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=401&q=80",
+        },
+        {
+          id: 14,
+          name: "Ghost 16",
+          brand: "Brooks",
+          category: "Sports",
+          price: 9799,
+          originalPrice: null,
+          rating: 4.7,
+          reviews: 1567,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1539185441755-769473a23570?w=401&q=80",
+        },
+        {
+          id: 15,
+          name: "Triumph 21",
+          brand: "Saucony",
+          category: "Sports",
+          price: 11299,
+          originalPrice: 13499,
+          rating: 4.8,
+          reviews: 987,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=401&q=80",
+        },
+
+        // CASUAL
+        {
+          id: 16,
+          name: "Stan Smith Lux",
+          brand: "Adidas",
+          category: "Casual",
+          price: 5999,
+          originalPrice: 7499,
+          rating: 4.7,
+          reviews: 5432,
+          badge: "Hot",
+          img: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=400&q=80",
+        },
+        {
+          id: 17,
+          name: "Air Force 1 '07",
+          brand: "Nike",
+          category: "Casual",
+          price: 7499,
+          originalPrice: null,
+          rating: 4.8,
+          reviews: 8765,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=400&q=80",
+        },
+        {
+          id: 18,
+          name: "Chuck Taylor All Star",
+          brand: "Converse",
+          category: "Casual",
+          price: 3999,
+          originalPrice: 4999,
+          rating: 4.6,
+          reviews: 12340,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1463100099107-aa0980c362e6?w=400&q=80",
+        },
+        {
+          id: 19,
+          name: "Old Skool Classic",
+          brand: "Vans",
+          category: "Casual",
+          price: 4499,
+          originalPrice: null,
+          rating: 4.7,
+          reviews: 9876,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=400&q=80",
+        },
+        {
+          id: 20,
+          name: "574 Core",
+          brand: "New Balance",
+          category: "Casual",
+          price: 5499,
+          originalPrice: 6999,
+          rating: 4.5,
+          reviews: 3456,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=401&q=80",
+        },
+        {
+          id: 21,
+          name: "Gazelle Indoor",
+          brand: "Adidas",
+          category: "Casual",
+          price: 6499,
+          originalPrice: 7999,
+          rating: 4.8,
+          reviews: 2345,
+          badge: "Hot",
+          img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=401&q=80",
+        },
+        {
+          id: 22,
+          name: "Cortez",
+          brand: "Nike",
+          category: "Casual",
+          price: 5999,
+          originalPrice: null,
+          rating: 4.6,
+          reviews: 1876,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1463100099107-aa0980c362e6?w=401&q=80",
+        },
+        {
+          id: 23,
+          name: "Authentic Canvas",
+          brand: "Vans",
+          category: "Casual",
+          price: 3299,
+          originalPrice: 3999,
+          rating: 4.5,
+          reviews: 7654,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=401&q=80",
+        },
+        {
+          id: 24,
+          name: "990v6",
+          brand: "New Balance",
+          category: "Casual",
+          price: 11999,
+          originalPrice: 13999,
+          rating: 4.9,
+          reviews: 1234,
+          badge: "Hot",
+          img: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=402&q=80",
+        },
+        {
+          id: 25,
+          name: "Handball Spezial",
+          brand: "Adidas",
+          category: "Casual",
+          price: 7999,
+          originalPrice: null,
+          rating: 4.8,
+          reviews: 4321,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=402&q=80",
+        },
+        {
+          id: 26,
+          name: "Sk8-Hi Platform",
+          brand: "Vans",
+          category: "Casual",
+          price: 5499,
+          originalPrice: 6499,
+          rating: 4.6,
+          reviews: 2109,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1463100099107-aa0980c362e6?w=402&q=80",
+        },
+        {
+          id: 27,
+          name: "Air Max 90",
+          brand: "Nike",
+          category: "Casual",
+          price: 9499,
+          originalPrice: 10999,
+          rating: 4.8,
+          reviews: 6789,
+          badge: "Hot",
+          img: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=402&q=80",
+        },
+        {
+          id: 28,
+          name: "Forum Low",
+          brand: "Adidas",
+          category: "Casual",
+          price: 5999,
+          originalPrice: null,
+          rating: 4.5,
+          reviews: 1567,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=403&q=80",
+        },
+        {
+          id: 29,
+          name: "Jack Purcell",
+          brand: "Converse",
+          category: "Casual",
+          price: 4499,
+          originalPrice: 5499,
+          rating: 4.6,
+          reviews: 2876,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=403&q=80",
+        },
+        {
+          id: 30,
+          name: "Air Max 270",
+          brand: "Nike",
+          category: "Casual",
+          price: 8499,
+          originalPrice: 9999,
+          rating: 4.7,
+          reviews: 3456,
+          badge: "Hot",
+          img: "https://images.unsplash.com/photo-1463100099107-aa0980c362e6?w=403&q=80",
+        },
+        {
+          id: 31,
+          name: "Slip-On Pro",
+          brand: "Vans",
+          category: "Casual",
+          price: 3799,
+          originalPrice: null,
+          rating: 4.5,
+          reviews: 5432,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=403&q=80",
+        },
+        {
+          id: 32,
+          name: "Yung-96",
+          brand: "Adidas",
+          category: "Casual",
+          price: 6999,
+          originalPrice: 8499,
+          rating: 4.6,
+          reviews: 1098,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=404&q=80",
+        },
+
+        // FORMAL
+        {
+          id: 33,
+          name: "Oxford Cap Toe",
+          brand: "Clarks",
+          category: "Formal",
+          price: 6999,
+          originalPrice: 8999,
+          rating: 4.7,
+          reviews: 2341,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1449505278894-297fdb3edbc1?w=400&q=80",
+        },
+        {
+          id: 34,
+          name: "Derby Brogue",
+          brand: "Ecco",
+          category: "Formal",
+          price: 8499,
+          originalPrice: null,
+          rating: 4.8,
+          reviews: 1234,
+          badge: "Hot",
+          img: "https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?w=400&q=80",
+        },
+        {
+          id: 35,
+          name: "Chelsea Boot Premium",
+          brand: "Clarks",
+          category: "Formal",
+          price: 7999,
+          originalPrice: 9499,
+          rating: 4.6,
+          reviews: 987,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=400&q=80",
+        },
+        {
+          id: 36,
+          name: "Wingtip Oxford",
+          brand: "Hush Puppies",
+          category: "Formal",
+          price: 5999,
+          originalPrice: 7499,
+          rating: 4.5,
+          reviews: 1876,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1449505278894-297fdb3edbc1?w=401&q=80",
+        },
+        {
+          id: 37,
+          name: "Monk Strap Double",
+          brand: "Ecco",
+          category: "Formal",
+          price: 9999,
+          originalPrice: 11999,
+          rating: 4.8,
+          reviews: 654,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?w=401&q=80",
+        },
+        {
+          id: 38,
+          name: "Plain Toe Derby",
+          brand: "Clarks",
+          category: "Formal",
+          price: 5499,
+          originalPrice: null,
+          rating: 4.6,
+          reviews: 2109,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=401&q=80",
+        },
+        {
+          id: 39,
+          name: "Tassel Loafer Classic",
+          brand: "Hush Puppies",
+          category: "Formal",
+          price: 6499,
+          originalPrice: 7999,
+          rating: 4.7,
+          reviews: 1432,
+          badge: "Hot",
+          img: "https://images.unsplash.com/photo-1449505278894-297fdb3edbc1?w=402&q=80",
+        },
+        {
+          id: 40,
+          name: "Slim Oxford Leather",
+          brand: "Ecco",
+          category: "Formal",
+          price: 10499,
+          originalPrice: 12999,
+          rating: 4.9,
+          reviews: 789,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?w=402&q=80",
+        },
+        {
+          id: 41,
+          name: "Brogue Derby",
+          brand: "Clarks",
+          category: "Formal",
+          price: 7499,
+          originalPrice: 8999,
+          rating: 4.6,
+          reviews: 1098,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=402&q=80",
+        },
+        {
+          id: 42,
+          name: "Penny Loafer",
+          brand: "Hush Puppies",
+          category: "Formal",
+          price: 5999,
+          originalPrice: null,
+          rating: 4.5,
+          reviews: 1654,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1449505278894-297fdb3edbc1?w=403&q=80",
+        },
+        {
+          id: 43,
+          name: "Cap Toe Blucher",
+          brand: "Ecco",
+          category: "Formal",
+          price: 8999,
+          originalPrice: 10499,
+          rating: 4.7,
+          reviews: 876,
+          badge: "Hot",
+          img: "https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?w=403&q=80",
+        },
+        {
+          id: 44,
+          name: "Longwing Brogue",
+          brand: "Clarks",
+          category: "Formal",
+          price: 6999,
+          originalPrice: 8499,
+          rating: 4.8,
+          reviews: 543,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=403&q=80",
+        },
+
+        // MORE SPORTS
+        {
+          id: 45,
+          name: "Fuel Cell Rebel v4",
+          brand: "New Balance",
+          category: "Sports",
+          price: 9999,
+          originalPrice: 11999,
+          rating: 4.8,
+          reviews: 876,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=401&q=80",
+        },
+        {
+          id: 46,
+          name: "Metaspeed Sky+",
+          brand: "Asics",
+          category: "Sports",
+          price: 14999,
+          originalPrice: 17999,
+          rating: 4.9,
+          reviews: 543,
+          badge: "Hot",
+          img: "https://images.unsplash.com/photo-1527612822757-9c80c7e9b9ba?w=401&q=80",
+        },
+        {
+          id: 47,
+          name: "Rincon 3",
+          brand: "Hoka",
+          category: "Sports",
+          price: 10499,
+          originalPrice: 12499,
+          rating: 4.7,
+          reviews: 1234,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=401&q=80",
+        },
+        {
+          id: 48,
+          name: "Adrenaline GTS 23",
+          brand: "Brooks",
+          category: "Sports",
+          price: 8999,
+          originalPrice: null,
+          rating: 4.6,
+          reviews: 2109,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1514989940723-e8e51635b782?w=401&q=80",
+        },
+        {
+          id: 49,
+          name: "Vaporfly 3",
+          brand: "Nike",
+          category: "Sports",
+          price: 19999,
+          originalPrice: 22999,
+          rating: 4.9,
+          reviews: 3456,
+          badge: "Hot",
+          img: "https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=401&q=80",
+        },
+        {
+          id: 50,
+          name: "Adizero Adios Pro 3",
+          brand: "Adidas",
+          category: "Sports",
+          price: 17999,
+          originalPrice: 20999,
+          rating: 4.9,
+          reviews: 1876,
+          badge: "Hot",
+          img: "https://images.unsplash.com/photo-1539185441755-769473a23570?w=402&q=80",
+        },
+
+        // MORE CASUAL
+        {
+          id: 51,
+          name: "Air Max 1",
+          brand: "Nike",
+          category: "Casual",
+          price: 8999,
+          originalPrice: 10499,
+          rating: 4.8,
+          reviews: 7654,
+          badge: "Hot",
+          img: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=405&q=80",
+        },
+        {
+          id: 52,
+          name: "Ultraboost 23",
+          brand: "Adidas",
+          category: "Casual",
+          price: 12999,
+          originalPrice: 14999,
+          rating: 4.8,
+          reviews: 4321,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=404&q=80",
+        },
+        {
+          id: 53,
+          name: "Pro Leather OX",
+          brand: "Converse",
+          category: "Casual",
+          price: 5499,
+          originalPrice: 6499,
+          rating: 4.6,
+          reviews: 2109,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1463100099107-aa0980c362e6?w=404&q=80",
+        },
+        {
+          id: 54,
+          name: "Era Classic",
+          brand: "Vans",
+          category: "Casual",
+          price: 3499,
+          originalPrice: null,
+          rating: 4.6,
+          reviews: 8765,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=404&q=80",
+        },
+        {
+          id: 55,
+          name: "550 Cream",
+          brand: "New Balance",
+          category: "Casual",
+          price: 7999,
+          originalPrice: 9499,
+          rating: 4.9,
+          reviews: 5678,
+          badge: "Hot",
+          img: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=406&q=80",
+        },
+
+        // MORE FORMAL
+        {
+          id: 56,
+          name: "Single Monk Classic",
+          brand: "Ecco",
+          category: "Formal",
+          price: 9499,
+          originalPrice: 11499,
+          rating: 4.7,
+          reviews: 654,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1449505278894-297fdb3edbc1?w=404&q=80",
+        },
+        {
+          id: 57,
+          name: "Formal Boot Chelsea",
+          brand: "Clarks",
+          category: "Formal",
+          price: 7999,
+          originalPrice: 9499,
+          rating: 4.6,
+          reviews: 876,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?w=404&q=80",
+        },
+        {
+          id: 58,
+          name: "Business Oxford",
+          brand: "Hush Puppies",
+          category: "Formal",
+          price: 5499,
+          originalPrice: 6999,
+          rating: 4.5,
+          reviews: 1234,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=404&q=80",
+        },
+
+        // MORE TO REACH 100+
+        {
+          id: 59,
+          name: "Speedgoat 5",
+          brand: "Hoka",
+          category: "Sports",
+          price: 12999,
+          originalPrice: 14999,
+          rating: 4.8,
+          reviews: 1098,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=402&q=80",
+        },
+        {
+          id: 60,
+          name: "Levitate 6",
+          brand: "Brooks",
+          category: "Sports",
+          price: 10999,
+          originalPrice: 12999,
+          rating: 4.7,
+          reviews: 765,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1527612822757-9c80c7e9b9ba?w=402&q=80",
+        },
+        {
+          id: 61,
+          name: "Ultraboost Light",
+          brand: "Adidas",
+          category: "Sports",
+          price: 10499,
+          originalPrice: 12499,
+          rating: 4.7,
+          reviews: 2345,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=402&q=80",
+        },
+        {
+          id: 62,
+          name: "Pegasus 40",
+          brand: "Nike",
+          category: "Sports",
+          price: 7999,
+          originalPrice: 9499,
+          rating: 4.6,
+          reviews: 4321,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1514989940723-e8e51635b782?w=402&q=80",
+        },
+        {
+          id: 63,
+          name: "Asics GT-2000 12",
+          brand: "Asics",
+          category: "Sports",
+          price: 7499,
+          originalPrice: null,
+          rating: 4.6,
+          reviews: 1876,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=402&q=80",
+        },
+        {
+          id: 64,
+          name: "Wave Sky 7",
+          brand: "Mizuno",
+          category: "Sports",
+          price: 9499,
+          originalPrice: 11499,
+          rating: 4.7,
+          reviews: 654,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1539185441755-769473a23570?w=403&q=80",
+        },
+        {
+          id: 65,
+          name: "Prophere",
+          brand: "Adidas",
+          category: "Casual",
+          price: 7999,
+          originalPrice: 9499,
+          rating: 4.5,
+          reviews: 876,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=407&q=80",
+        },
+        {
+          id: 66,
+          name: "Air Max Plus",
+          brand: "Nike",
+          category: "Casual",
+          price: 10499,
+          originalPrice: 12499,
+          rating: 4.7,
+          reviews: 3456,
+          badge: "Hot",
+          img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=405&q=80",
+        },
+        {
+          id: 67,
+          name: "Dunk Low Retro",
+          brand: "Nike",
+          category: "Casual",
+          price: 8999,
+          originalPrice: null,
+          rating: 4.9,
+          reviews: 12345,
+          badge: "Hot",
+          img: "https://images.unsplash.com/photo-1463100099107-aa0980c362e6?w=405&q=80",
+        },
+        {
+          id: 68,
+          name: "NMD_R1",
+          brand: "Adidas",
+          category: "Casual",
+          price: 9499,
+          originalPrice: 11499,
+          rating: 4.7,
+          reviews: 5678,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=405&q=80",
+        },
+        {
+          id: 69,
+          name: "Suede Classic",
+          brand: "Puma",
+          category: "Casual",
+          price: 4999,
+          originalPrice: 5999,
+          rating: 4.6,
+          reviews: 7890,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=408&q=80",
+        },
+        {
+          id: 70,
+          name: "RS-X Reinvention",
+          brand: "Puma",
+          category: "Casual",
+          price: 5999,
+          originalPrice: 7499,
+          rating: 4.5,
+          reviews: 1234,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=406&q=80",
+        },
+        {
+          id: 71,
+          name: "Oxford Brogue Premium",
+          brand: "Ecco",
+          category: "Formal",
+          price: 11999,
+          originalPrice: 13999,
+          rating: 4.8,
+          reviews: 432,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1449505278894-297fdb3edbc1?w=405&q=80",
+        },
+        {
+          id: 72,
+          name: "Derby Formal Classic",
+          brand: "Clarks",
+          category: "Formal",
+          price: 6499,
+          originalPrice: 7999,
+          rating: 4.6,
+          reviews: 987,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?w=405&q=80",
+        },
+        {
+          id: 73,
+          name: "Loafer Moccasin",
+          brand: "Hush Puppies",
+          category: "Formal",
+          price: 5499,
+          originalPrice: null,
+          rating: 4.5,
+          reviews: 1543,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=405&q=80",
+        },
+        {
+          id: 74,
+          name: "Mach 6",
+          brand: "Hoka",
+          category: "Sports",
+          price: 11499,
+          originalPrice: 13499,
+          rating: 4.8,
+          reviews: 876,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=403&q=80",
+        },
+        {
+          id: 75,
+          name: "Hyperion Max",
+          brand: "Brooks",
+          category: "Sports",
+          price: 13999,
+          originalPrice: 15999,
+          rating: 4.9,
+          reviews: 543,
+          badge: "Hot",
+          img: "https://images.unsplash.com/photo-1527612822757-9c80c7e9b9ba?w=403&q=80",
+        },
+        {
+          id: 76,
+          name: "Air Zoom Alphafly",
+          brand: "Nike",
+          category: "Sports",
+          price: 22999,
+          originalPrice: 25999,
+          rating: 4.9,
+          reviews: 2109,
+          badge: "Hot",
+          img: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=403&q=80",
+        },
+        {
+          id: 77,
+          name: "Kinvara 15",
+          brand: "Saucony",
+          category: "Sports",
+          price: 7999,
+          originalPrice: 9499,
+          rating: 4.7,
+          reviews: 1098,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1514989940723-e8e51635b782?w=403&q=80",
+        },
+        {
+          id: 78,
+          name: "Defynt Mid",
+          brand: "Puma",
+          category: "Casual",
+          price: 3999,
+          originalPrice: 4999,
+          rating: 4.4,
+          reviews: 654,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=409&q=80",
+        },
+        {
+          id: 79,
+          name: "Basket Classic",
+          brand: "Puma",
+          category: "Casual",
+          price: 4499,
+          originalPrice: null,
+          rating: 4.5,
+          reviews: 2345,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=407&q=80",
+        },
+        {
+          id: 80,
+          name: "Mayze Lth",
+          brand: "Puma",
+          category: "Casual",
+          price: 5999,
+          originalPrice: 7499,
+          rating: 4.6,
+          reviews: 987,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1463100099107-aa0980c362e6?w=406&q=80",
+        },
+        {
+          id: 81,
+          name: "Thunder Desert",
+          brand: "Puma",
+          category: "Casual",
+          price: 6499,
+          originalPrice: 7999,
+          rating: 4.5,
+          reviews: 765,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=406&q=80",
+        },
+        {
+          id: 82,
+          name: "Oxford Toe Cap",
+          brand: "Clarks",
+          category: "Formal",
+          price: 7499,
+          originalPrice: 8999,
+          rating: 4.6,
+          reviews: 1234,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1449505278894-297fdb3edbc1?w=406&q=80",
+        },
+        {
+          id: 83,
+          name: "Full Brogue Derby",
+          brand: "Ecco",
+          category: "Formal",
+          price: 9999,
+          originalPrice: 11999,
+          rating: 4.7,
+          reviews: 543,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?w=406&q=80",
+        },
+        {
+          id: 84,
+          name: "Velvet Loafer",
+          brand: "Hush Puppies",
+          category: "Formal",
+          price: 6999,
+          originalPrice: 8499,
+          rating: 4.6,
+          reviews: 876,
+          badge: "Hot",
+          img: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=406&q=80",
+        },
+        {
+          id: 85,
+          name: "Wave Inspire 20",
+          brand: "Mizuno",
+          category: "Sports",
+          price: 10499,
+          originalPrice: 12499,
+          rating: 4.7,
+          reviews: 654,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=403&q=80",
+        },
+        {
+          id: 86,
+          name: "GT-1000 12",
+          brand: "Asics",
+          category: "Sports",
+          price: 6999,
+          originalPrice: 8499,
+          rating: 4.5,
+          reviews: 1876,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1539185441755-769473a23570?w=404&q=80",
+        },
+        {
+          id: 87,
+          name: "Air Zoom Structure 25",
+          brand: "Nike",
+          category: "Sports",
+          price: 8499,
+          originalPrice: 9999,
+          rating: 4.6,
+          reviews: 1234,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=404&q=80",
+        },
+        {
+          id: 88,
+          name: "SolarGlide 6",
+          brand: "Adidas",
+          category: "Sports",
+          price: 8999,
+          originalPrice: 10499,
+          rating: 4.7,
+          reviews: 987,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1527612822757-9c80c7e9b9ba?w=404&q=80",
+        },
+        {
+          id: 89,
+          name: "Chuck 70 High",
+          brand: "Converse",
+          category: "Casual",
+          price: 4999,
+          originalPrice: 5999,
+          rating: 4.7,
+          reviews: 6543,
+          badge: "Hot",
+          img: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=410&q=80",
+        },
+        {
+          id: 90,
+          name: "Forum 84 Low",
+          brand: "Adidas",
+          category: "Casual",
+          price: 6999,
+          originalPrice: 8499,
+          rating: 4.7,
+          reviews: 2345,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=408&q=80",
+        },
+        {
+          id: 91,
+          name: "Air Jordan 1 Low",
+          brand: "Nike",
+          category: "Casual",
+          price: 12999,
+          originalPrice: 15499,
+          rating: 4.9,
+          reviews: 18765,
+          badge: "Hot",
+          img: "https://images.unsplash.com/photo-1463100099107-aa0980c362e6?w=407&q=80",
+        },
+        {
+          id: 92,
+          name: "Half Cab Pro",
+          brand: "Vans",
+          category: "Casual",
+          price: 4999,
+          originalPrice: 5999,
+          rating: 4.6,
+          reviews: 3456,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=407&q=80",
+        },
+        {
+          id: 93,
+          name: "Leather Oxford",
+          brand: "Clarks",
+          category: "Formal",
+          price: 8499,
+          originalPrice: 9999,
+          rating: 4.7,
+          reviews: 765,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1449505278894-297fdb3edbc1?w=407&q=80",
+        },
+        {
+          id: 94,
+          name: "Brogued Chelsea",
+          brand: "Ecco",
+          category: "Formal",
+          price: 10999,
+          originalPrice: 12999,
+          rating: 4.8,
+          reviews: 432,
+          badge: "Hot",
+          img: "https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?w=407&q=80",
+        },
+        {
+          id: 95,
+          name: "Suede Loafer",
+          brand: "Hush Puppies",
+          category: "Formal",
+          price: 5999,
+          originalPrice: 7499,
+          rating: 4.5,
+          reviews: 1098,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=407&q=80",
+        },
+        {
+          id: 96,
+          name: "Bondi 8",
+          brand: "Hoka",
+          category: "Sports",
+          price: 13999,
+          originalPrice: 15999,
+          rating: 4.9,
+          reviews: 3456,
+          badge: "Hot",
+          img: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=404&q=80",
+        },
+        {
+          id: 97,
+          name: "Tempus",
+          brand: "Brooks",
+          category: "Sports",
+          price: 11499,
+          originalPrice: 13499,
+          rating: 4.7,
+          reviews: 654,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1514989940723-e8e51635b782?w=404&q=80",
+        },
+        {
+          id: 98,
+          name: "Wave Horizon 7",
+          brand: "Mizuno",
+          category: "Sports",
+          price: 11999,
+          originalPrice: 13999,
+          rating: 4.8,
+          reviews: 876,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=404&q=80",
+        },
+        {
+          id: 99,
+          name: "Air Max 97",
+          brand: "Nike",
+          category: "Casual",
+          price: 11999,
+          originalPrice: 13999,
+          rating: 4.8,
+          reviews: 8765,
+          badge: "Hot",
+          img: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=411&q=80",
+        },
+        {
+          id: 100,
+          name: "Superstar OG",
+          brand: "Adidas",
+          category: "Casual",
+          price: 5999,
+          originalPrice: 7499,
+          rating: 4.7,
+          reviews: 14321,
+          badge: "Hot",
+          img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=409&q=80",
+        },
+        {
+          id: 101,
+          name: "Slip-On Checkerboard",
+          brand: "Vans",
+          category: "Casual",
+          price: 3499,
+          originalPrice: 4299,
+          rating: 4.7,
+          reviews: 9876,
+          badge: "Sale",
+          img: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=408&q=80",
+        },
+        {
+          id: 102,
+          name: "Zante Pursuit",
+          brand: "New Balance",
+          category: "Sports",
+          price: 7499,
+          originalPrice: 8999,
+          rating: 4.6,
+          reviews: 543,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=405&q=80",
+        },
+        {
+          id: 103,
+          name: "Satin Oxford",
+          brand: "Clarks",
+          category: "Formal",
+          price: 8999,
+          originalPrice: 10499,
+          rating: 4.7,
+          reviews: 321,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1449505278894-297fdb3edbc1?w=408&q=80",
+        },
+        {
+          id: 104,
+          name: "Derby Premium Leather",
+          brand: "Ecco",
+          category: "Formal",
+          price: 12499,
+          originalPrice: 14499,
+          rating: 4.9,
+          reviews: 234,
+          badge: "Hot",
+          img: "https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?w=408&q=80",
+        },
+        {
+          id: 105,
+          name: "Oxford Apron Toe",
+          brand: "Hush Puppies",
+          category: "Formal",
+          price: 5999,
+          originalPrice: null,
+          rating: 4.5,
+          reviews: 765,
+          badge: "New",
+          img: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=408&q=80",
+        },
+      ];
+
+      let cart = [];
+      let currentFilter = "All";
+      let visibleCount = 24;
+      let filteredProducts = [...allProducts];
+
+      function renderStars(rating) {
+        let stars = "";
+        for (let i = 1; i <= 5; i++) {
+          if (i <= Math.floor(rating)) stars += '<span class="star">★</span>';
+          else if (i - 0.5 <= rating) stars += '<span class="star">★</span>';
+          else stars += '<span class="star" style="color:#ddd">★</span>';
+        }
+        return stars;
+      }
+
+      function formatReviews(n) {
+        if (n >= 1000) return (n / 1000).toFixed(1) + "k";
+        return n;
+      }
+
+      function renderProducts() {
+        const grid = document.getElementById("productsGrid");
+        const toShow = filteredProducts.slice(0, visibleCount);
+        grid.innerHTML = toShow
+          .map(
+            (p) => `
+    <div class="product-card fade-in" id="pc-${p.id}">
+      <div class="product-img">
+        <img src="${p.img}" alt="${p.name}" loading="lazy">
+        ${p.badge ? `<span class="product-badge badge-${p.badge.toLowerCase()}">${p.badge}</span>` : ""}
+        <button class="wishlist-btn" title="Add to wishlist">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+        </button>
+        <button class="product-quick" onclick="addToCart(${p.id})">Add to Cart</button>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">${p.brand}</div>
+        <div class="product-name">${p.name}</div>
+        <div class="product-bottom">
+          <div class="product-price">
+            ${p.originalPrice ? `<span class="original">₹${p.originalPrice.toLocaleString("en-IN")}</span>` : ""}
+            <span class="${p.originalPrice ? "sale" : ""}">₹${p.price.toLocaleString("en-IN")}</span>
+          </div>
+          <div class="product-stars">
+            ${renderStars(p.rating)}
+            <span class="star-count">(${formatReviews(p.reviews)})</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  `,
+          )
+          .join("");
+
+        document.getElementById("loadMoreBtn").style.display =
+          filteredProducts.length > visibleCount ? "inline-block" : "none";
+
+        setTimeout(() => {
+          document.querySelectorAll(".product-card.fade-in").forEach((el) => {
+            el.classList.add("visible");
+          });
+        }, 50);
+      }
+
+      function filterProducts(cat, btn) {
+        currentFilter = cat;
+        visibleCount = 24;
+        if (cat === "All") {
+          filteredProducts = [...allProducts];
+        } else {
+          filteredProducts = allProducts.filter((p) => p.category === cat);
+        }
+        sortProducts();
+        document
+          .querySelectorAll(".filter-btn")
+          .forEach((b) => b.classList.remove("active"));
+        if (btn) btn.classList.add("active");
+        scrollToSection("products");
+      }
+
+      function sortProducts() {
+        const sort = document.getElementById("sortSelect").value;
+        if (sort === "price-low")
+          filteredProducts.sort((a, b) => a.price - b.price);
+        else if (sort === "price-high")
+          filteredProducts.sort((a, b) => b.price - a.price);
+        else if (sort === "rating")
+          filteredProducts.sort((a, b) => b.rating - a.rating);
+        else filteredProducts.sort((a, b) => a.id - b.id);
+        renderProducts();
+      }
+
+      function loadMore() {
+        visibleCount += 12;
+        renderProducts();
+      }
+
+      // CART
+      function addToCart(id) {
+        const product = allProducts.find((p) => p.id === id);
+        const existing = cart.find((c) => c.id === id);
+        if (existing) {
+          existing.qty++;
+        } else {
+          cart.push({ ...product, qty: 1 });
+        }
+        updateCart();
+        showToast(`${product.name} added to cart`);
+      }
+
+      function removeFromCart(id) {
+        cart = cart.filter((c) => c.id !== id);
+        updateCart();
+        renderCartItems();
+      }
+
+      function updateCart() {
+        document.getElementById("cartCount").textContent = cart.reduce(
+          (s, c) => s + c.qty,
+          0,
+        );
+        const total = cart.reduce((s, c) => s + c.price * c.qty, 0);
+        document.getElementById("cartTotal").textContent =
+          "₹" + total.toLocaleString("en-IN");
+        renderCartItems();
+      }
+
+      function renderCartItems() {
+        const container = document.getElementById("cartItems");
+        if (cart.length === 0) {
+          container.innerHTML = `<div class="cart-empty" id="cartEmpty"><div style="font-size:3rem;margin-bottom:1rem">👟</div><p>Your cart is empty</p><p style="font-size:0.8rem;margin-top:0.5rem;color:#999">Add some shoes to get started</p></div>`;
+          return;
+        }
+        container.innerHTML = cart
+          .map(
+            (item) => `
+    <div class="cart-item">
+      <img class="cart-item-img" src="${item.img}" alt="${item.name}">
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div style="font-size:0.8rem;color:#999;margin-bottom:4px">${item.brand} · Qty: ${item.qty}</div>
+        <div class="cart-item-price">₹${(item.price * item.qty).toLocaleString("en-IN")}</div>
+      </div>
+      <button class="cart-item-remove" onclick="removeFromCart(${item.id})">✕</button>
+    </div>
+  `,
+          )
+          .join("");
+      }
+
+      function openCart() {
+        document.getElementById("cartOverlay").classList.add("open");
+        document.getElementById("cartSidebar").classList.add("open");
+      }
+      function closeCart() {
+        document.getElementById("cartOverlay").classList.remove("open");
+        document.getElementById("cartSidebar").classList.remove("open");
+      }
+      function checkout() {
+        if (cart.length === 0) {
+          showToast("Your cart is empty!");
+          return;
+        }
+        showToast("Proceeding to checkout... (demo)");
+        closeCart();
+      }
+
+      document.getElementById("cartBtn").addEventListener("click", openCart);
+
+      // TOAST
+      function showToast(msg) {
+        const t = document.getElementById("toast");
+        t.textContent = msg;
+        t.classList.add("show");
+        setTimeout(() => t.classList.remove("show"), 2500);
+      }
+
+      // NEWSLETTER
+      function subscribeNewsletter() {
+        showToast("Thanks! You're subscribed for 10% off.");
+      }
+
+      // HERO SLIDER
+      let currentSlide = 0;
+      const totalSlides = 3;
+      let autoSlide;
+
+      function goToSlide(n) {
+        currentSlide = n;
+        document.getElementById("slides").style.transform =
+          `translateX(-${n * 100}%)`;
+        document
+          .querySelectorAll(".dot")
+          .forEach((d, i) => d.classList.toggle("active", i === n));
+      }
+      function nextSlide() {
+        goToSlide((currentSlide + 1) % totalSlides);
+        resetAutoSlide();
+      }
+      function prevSlide() {
+        goToSlide((currentSlide + totalSlides - 1) % totalSlides);
+        resetAutoSlide();
+      }
+      function resetAutoSlide() {
+        clearInterval(autoSlide);
+        autoSlide = setInterval(nextSlide, 5000);
+      }
+      autoSlide = setInterval(nextSlide, 5000);
+
+      // SCROLL ANIMATION
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add("visible");
+          });
+        },
+        { threshold: 0.1 },
+      );
+      document
+        .querySelectorAll(".fade-in")
+        .forEach((el) => observer.observe(el));
+
+      function scrollToSection(id) {
+        document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+      }
+
+      // INIT
+      renderProducts();
+    </script>
+  </body>
+</html>
