@@ -1064,6 +1064,7 @@
         <li><a href="#contact">Contact</a></li>
       </ul>
       <div class="nav-right">
+        <button id="loginBtn">Login</button>
         <div class="nav-cart" id="cartBtn">
           <svg viewBox="0 0 24 24" stroke-width="1.5">
             <path
@@ -1467,6 +1468,10 @@
     <div class="toast" id="toast"></div>
 
     <script>
+      const supabase = window.supabase.createClient(
+  "https://vxnchwgincedxsyqaiga.supabase.co",
+  "sb_publishable_VyvvaFGDdZYAj5z4YYi7fA_HsZEcEQJ"
+);
       // PRODUCTS DATA
       const allProducts = [
         // SPORTS
@@ -2972,6 +2977,81 @@
 
       // INIT
       renderProducts();
+      document
+.getElementById("loginBtn")
+.addEventListener("click", () => {
+
+  document.getElementById("authBox")
+  .style.display = "block";
+
+});
+
+
+async function signUp() {
+
+  const email =
+    document.getElementById("email").value;
+
+  const password =
+    document.getElementById("password").value;
+
+  const { error } =
+    await supabase.auth.signUp({
+      email,
+      password
+    });
+
+  if(error){
+    alert(error.message);
+  }else{
+    alert("Account Created");
+  }
+}
+
+
+async function login() {
+
+  const email =
+    document.getElementById("email").value;
+
+  const password =
+    document.getElementById("password").value;
+
+  const { error } =
+    await supabase.auth.signInWithPassword({
+      email,
+      password
+    });
+
+  if(error){
+    alert(error.message);
+  }else{
+    alert("Logged In");
+  }
+}
     </script>
+    <div id="authBox" style="
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:white;
+padding:20px;
+display:none;
+z-index:9999;
+border:1px solid #ccc;
+">
+
+<h3>Login / Signup</h3>
+
+<input id="email" type="email" placeholder="Email"><br><br>
+
+<input id="password" type="password" placeholder="Password"><br><br>
+
+<button onclick="signUp()">Sign Up</button>
+
+<button onclick="login()">Login</button>
+
+</div>
   </body>
 </html>
